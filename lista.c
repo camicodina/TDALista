@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include "lista.h"
@@ -19,7 +21,7 @@ lista_t* lista_crear(){
 
 nodo_t* crear_nuevo_nodo(void* elemento){
     nodo_t* nodo = malloc(sizeof(nodo_t));
-    if(!nodo) return -1;
+    if(!nodo) return NULL;
     nodo->elemento = elemento;
     nodo->siguiente = NULL;
     return nodo;
@@ -137,8 +139,8 @@ int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
  */
 
 void* lista_elemento_en_posicion(lista_t* lista, size_t posicion){
-    if(!lista) return -1;
-    if(!posicion) return -1;
+    if(!lista) return NULL;
+    if(!posicion) return NULL;
     size_t contador = 0;
     if(posicion>lista->cantidad || posicion<0 || lista_vacia(lista)){
         return NULL;
@@ -186,7 +188,11 @@ bool lista_vacia(lista_t* lista){
  * Devuelve la cantidad de elementos almacenados en la lista.
  */
 size_t lista_elementos(lista_t* lista){
-    if(lista) return (lista->cantidad);
+    if(!lista || lista_vacia(lista)){
+        return 0;
+    }else{
+        return (lista->cantidad);
+    }
 }
 
 /* 
@@ -232,7 +238,7 @@ int lista_desapilar(lista_t* lista){
  * en caso de estar vacía.
  */
 void* lista_tope(lista_t* lista){
-    if(!lista) return -1;
+    if(!lista) return NULL;
     if (lista_vacia(lista)){
         return NULL;
     }else{
@@ -273,17 +279,21 @@ void* lista_primero(lista_t* lista){
  */
 
 void lista_destruir(lista_t* lista){
-    if(!lista) return NULL;
-    if(lista_vacia(lista)){
-        free(lista);
-    }else{
+    if(lista){
+        if(lista_vacia(lista)){
+            free(lista);
+        }else{
         while(lista->nodo_inicio != lista->nodo_fin){
             lista_borrar(lista);
         }
         free(lista->nodo_inicio);
         free(lista);
     }
+    }
+    
 }
+
+// --------------------------------- ITERADOR -------------------------------- //
 
 /*
  * Crea un iterador para una lista. El iterador creado es válido desde
@@ -296,13 +306,27 @@ void lista_destruir(lista_t* lista){
  *
  * Devuelve el puntero al iterador creado o NULL en caso de error.
  */
-lista_iterador_t* lista_iterador_crear(lista_t* lista);
+lista_iterador_t* lista_iterador_crear(lista_t* lista){
+    if(!lista) return NULL;
+    if(lista_vacia(lista)) return NULL;
+    lista_iterador_t* nuevo_iterador = malloc(sizeof(lista_iterador_t));
+    if(!nuevo_iterador) return NULL;
+    nuevo_iterador->lista = lista;
+    nuevo_iterador->corriente = lista_iterador_elemento_actual(nuevo_iterador);
+    return nuevo_iterador;
+}
 
 /*
  * Devuelve true si hay mas elementos sobre los cuales iterar o false
  * si no hay mas.
  */
-bool lista_iterador_tiene_siguiente(lista_iterador_t* iterador);
+bool lista_iterador_tiene_siguiente(lista_iterador_t* iterador){
+    bool tiene_siguiente = true;
+    if(!iterador || lista_vacia(iterador->lista) || lista_iterador_elemento_actual(iterador) == iterador->lista->nodo_fin){
+        tiene_siguiente = false;
+    }
+    return tiene_siguiente;
+}
 
 /*
  * Avanza el iterador al siguiente elemento.
@@ -312,18 +336,34 @@ bool lista_iterador_tiene_siguiente(lista_iterador_t* iterador);
  * Una vez llegado al último elemento, si se invoca a
  * lista_iterador_elemento_actual, el resultado siempre será NULL.
  */
-bool lista_iterador_avanzar(lista_iterador_t* iterador);
+bool lista_iterador_avanzar(lista_iterador_t* iterador){
+    if(!iterador) return false;
+    if(lista_iterador_tiene_siguiente(iterador) == false) return false;
+    if(iterador->corriente == NULL){
+        iterador->corriente = iterador->lista->nodo_inicio;
+    }
+    iterador->corriente = iterador->corriente->siguiente;
+    return true;
+}
 
 /*
  * Devuelve el elemento actual del iterador o NULL en caso de que no
  * exista dicho elemento o en caso de error.
  */
-void* lista_iterador_elemento_actual(lista_iterador_t* iterador);
+void* lista_iterador_elemento_actual(lista_iterador_t* iterador){
+    if(!iterador) return NULL;
+    if(!iterador->corriente) return NULL;
+    return iterador->corriente;
+}
 
 /*
  * Libera la memoria reservada por el iterador.
  */
-void lista_iterador_destruir(lista_iterador_t* iterador);
+void lista_iterador_destruir(lista_iterador_t* iterador){
+    if(iterador){
+        free(iterador);
+    }
+}
 
 /*
  * Iterador interno. Recorre la lista e invoca la funcion con cada elemento de
@@ -332,6 +372,21 @@ void lista_iterador_destruir(lista_iterador_t* iterador);
  *
  * La función retorna la cantidad de elementos iterados o 0 en caso de error.
  */
-size_t lista_con_cada_elemento(lista_t* lista, bool (*funcion)(void*, void*), void *contexto);
+size_t lista_con_cada_elemento(lista_t* lista, bool (*funcion)(void*, void*), void *contexto){
+    if(!lista) return 0;
+    if(!(*funcion)) return 0;
+    if(!contexto) return 0;
+    if(lista_vacia(lista)) return 0;
+    size_t cantidad_de_elementos_iterados = 0;
+    lista_iterador_t* iterador_interno = lista_iterador_crear(lista);
+    if(!iterador_interno) return 0;
+    while(lista_iterador_tiene_siguiente(iterador_interno)){
+        (*funcion)(lista_iterador_elemento_actual(iterador_interno), contexto);
+        (cantidad_de_elementos_iterados)++;
+    }
+    lista_iterador_destruir(iterador_interno);
+    return cantidad_de_elementos_iterados;
+}
+
 
 
