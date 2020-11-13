@@ -39,9 +39,34 @@ dicha implementación.
 _Desarrollo los siguientes conceptos teóricos..._
 
 * **Listas**
-1. ¿Qué es lo que entendés por una lista? ¿Cuáles son las diferencias entre ser simple o doblemente enlazada?
+
+Tipo de dato basado en nodos enlazados que posee una sucesor (menos el último) y un predecesor(menos el primero).
+Una lista es un colección ordenada de datos que contiene un número (N) de nodos. Cada nodo contiene una cantidad específica de datos y una referencia al nodo siguiente. Cuando juntamos estos nodos, creando una especie de cadena, tenemos una lista enlazada.
+Estas listas utilizan distintos métodos:
+1. Crear
+2. Insertar (al final)
+3. Insertar en posición X
+4. Borrar (del final)
+5. Borrar en posición X
+6. Elemento en posición X (devolver)
+7. Último (devolver)
+8. ¿Está vacía?
+9. Destruir
+
+y tienen distintos tipos:
+1. Simplemente Enlazada
+2. Doblemente Enlazada
+3. Circular
+4. Circular doble
+
+La simple es una implementación con nodos donde cada uno refiere al siguiente, manteniendo referencia al primer nodo mientras que la doblementente enlazada mantiene referencia del principio y final del nodo.
+
+
 * **Pilas y Colas**
+
 2. ¿Cuáles son las características fundamentales de las Pilas? ¿Y de las Colas?
+
+
 * **Iteradores**
 3. ¿Qué es un iterador? ¿Cuál es su función?
 * **Diferencia entre Iterador Interno e Iterador Externo**
