@@ -364,17 +364,15 @@ void lista_iterador_destruir(lista_iterador_t* iterador){
 size_t lista_con_cada_elemento(lista_t* lista, bool (*funcion)(void*, void*), void *contexto){
     if(!lista) return 0;
     if(!funcion) return 0;
+    if(!contexto) return 0;
     size_t cantidad_de_elementos_iterados = 0;
-    lista_iterador_t* iterador_interno = lista_iterador_crear(lista);
-    nodo_t* aux_buscar = iterador_interno->corriente;
+    nodo_t* aux_buscar = lista->nodo_inicio;
     bool sigo_recorriendo = true;
 
-    while(lista_iterador_tiene_siguiente(iterador_interno) && sigo_recorriendo){
+    while(cantidad_de_elementos_iterados < (lista->cantidad) && sigo_recorriendo){
         sigo_recorriendo = funcion(aux_buscar->elemento, contexto);
+        aux_buscar = aux_buscar->siguiente;
         (cantidad_de_elementos_iterados)++;
-        lista_iterador_avanzar(iterador_interno);
     }
-
-    lista_iterador_destruir(iterador_interno);
     return cantidad_de_elementos_iterados;
 }
