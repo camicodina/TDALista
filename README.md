@@ -20,8 +20,8 @@ _Explicación de lo entregado, como compilarlo (línea de compilación), como ej
 
 Comandos de compilación y ejecución:
 
-> $ gcc *.c -o lista_se -g -std=c99 -Wall -Wconversion -Wtype -limits -pedantic -Werror -O0                
-> $ valgrind --leak -check=full --track -origins=yes --show -reachable=yes ./lista_se
+> $ gcc *.c -o lista_se -g -std=c99 -Wall -Wconversion -Wtype-limits -pedantic -Werror -O0                
+> $ valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./lista_se
 
 
 ### Funcionamiento de la implementación... ⚙
