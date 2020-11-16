@@ -34,7 +34,7 @@ Comandos de checkeo de memoria:
 
 - La lista se crea inicialmente siendo sus nodos inicial y final NULL y teniendo una cantidad inicial de 0 nodos. 
 - A la hora de agregar un nodo al final de la lista, primero reserva memoria para un nodo cuyo elemento es el pasado por parámetro y su "siguiente" apunta a NULL. Verifica si está en el estado inicial. De ser así, hace que los nodos inicial y final sean este nuevo nodo creado y la cantidad es 1. Sino, hace que el nodo final de la lista apunte al nuevo nodo en vez de a NULL y cambia el nodo final por el nuevo nodo; suma 1 a la cantidad.
-- Si queremos insertar en otra posición, en caso de que la posicion sea mayor a las posiciones posibles o se trate de la ultima posición, ejecuta la función anterior, sino, crea un nodo.<br> 
+- Si queremos insertar en otra posición, en caso de que la posicion sea mayor a las posiciones posibles, ejecuta la función anterior, sino, crea un nodo.<br> 
 El caso más sencillo sería que la posición pedida sea 0, pero si no lo es, recorre la lista para encontrar el nodo en la posición anterior a la pedida. El nuevo nodo apuntará al nodo en la posición buscada y el nodo anterior a la misma que encontramos cambia su "siguiente" al nuevo nodo.
 -  Para borrar un nodo de una posición recibida por parámetro la lógica es similar: verificamos que si la posición es mayor o igual a las posiciones posibles, debemos borrar el último llamando a la función que hace lo propio (y describo a continuación). Si la posición es válida y no es 0, recorre la lista para guardar referencia del nodo anterior y el posterior al nodo que queremos eliminar.<br>
 Liberamos el nodo y hacemos que el anterior apunte al posterior.

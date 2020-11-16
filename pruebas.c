@@ -15,7 +15,7 @@ void probar_crear_lista_vacia(){
 }
 
 
-void probar_insertar_en_lista(lista_t* lista_vocales){
+lista_t* probar_insertar_en_lista(lista_t* lista_vocales){
     char a='a',e='e',i='i',o='o',u='u';
 
     pa2m_afirmar((lista_vocales=lista_crear()) != NULL, "Se crea lista");
@@ -36,11 +36,18 @@ void probar_insertar_en_lista(lista_t* lista_vocales){
     pa2m_afirmar(lista_elemento_en_posicion(lista_vocales, 3) == &o, "El cuarto elemento es correcto");
     pa2m_afirmar(lista_elemento_en_posicion(lista_vocales, 4) == &u, "El quinto elemento es correcto");
 
+    return lista_vocales;
 }
 
-void probar_borrar_en_lista(lista_t* lista_vocales){
+lista_t* probar_borrar_en_lista(lista_t* lista_vocales){
     char a='a',e='e',i='i',o='o',u='u';
 
+    pa2m_afirmar(lista_vocales->cantidad == 5, "Hay cinco nodos");
+    pa2m_afirmar(lista_elemento_en_posicion(lista_vocales, 0) == &a, "El primer elemento es correcto");
+    pa2m_afirmar(lista_elemento_en_posicion(lista_vocales, 1) == &e, "El segundo elemento es correcto");
+    pa2m_afirmar(lista_elemento_en_posicion(lista_vocales, 2) == &i, "El tercer elemento es correcto");
+    pa2m_afirmar(lista_elemento_en_posicion(lista_vocales, 3) == &o, "El cuarto elemento es correcto");
+    pa2m_afirmar(lista_elemento_en_posicion(lista_vocales, 4) == &u, "El quinto elemento es correcto");
     pa2m_afirmar(lista_borrar(lista_vocales) == 0, "Se borra ultimo elemento");
     pa2m_afirmar(lista_elemento_en_posicion(lista_vocales, 4) == NULL, "No hay quinto elemento");
     pa2m_afirmar(lista_vocales->cantidad == 4, "Hay cuatro elementos");
@@ -50,6 +57,7 @@ void probar_borrar_en_lista(lista_t* lista_vocales){
     pa2m_afirmar(lista_elemento_en_posicion(lista_vocales, 1) == &i, "El segundo elemento es correcto");
     pa2m_afirmar(lista_elemento_en_posicion(lista_vocales, 2) == &o, "El tercer elemento es correcto");
 
+    return lista_vocales;
 }
 
 
@@ -59,10 +67,10 @@ int main(){
     probar_crear_lista_vacia();
 
     pa2m_nuevo_grupo("PRUEBAS DE INSERTAR A LISTA");
-    probar_insertar_en_lista(lista);
+    lista = probar_insertar_en_lista(lista);
 
     pa2m_nuevo_grupo("PRUEBAS DE BORRAR DE LISTA");
-    probar_borrar_en_lista(lista);
+    lista = probar_borrar_en_lista(lista);
     
     lista_destruir(lista);
 

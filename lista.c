@@ -57,7 +57,7 @@ int lista_insertar(lista_t* lista, void* elemento){
 int lista_insertar_en_posicion(lista_t* lista, void* elemento, size_t posicion){
     if(!lista) return -1;
     int contador = 0;
-    if(posicion>=(lista->cantidad-1) || lista->cantidad==0){
+    if(posicion>(lista->cantidad-1) || lista->cantidad==0){
         lista_insertar(lista, elemento);
     }else{
         nodo_t* nodo_a_insertar_en_posicion = aux_crear_nodos(elemento);

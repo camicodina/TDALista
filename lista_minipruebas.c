@@ -84,16 +84,16 @@ void probar_operaciones_pila(){
     lista_destruir(pila);
 }
 
-int main(){
+// int main(){
 
-    printf("Pruebo que la lista se comporte como lista\n");
-    probar_operaciones_lista();
+//     printf("Pruebo que la lista se comporte como lista\n");
+//     probar_operaciones_lista();
   
-    printf("\nPruebo el comportamiento de cola\n");
-    probar_operaciones_cola();
+//     printf("\nPruebo el comportamiento de cola\n");
+//     probar_operaciones_cola();
     
-    printf("\nPruebo el comportamiento de pila\n");
-    probar_operaciones_pila();
+//     printf("\nPruebo el comportamiento de pila\n");
+//     probar_operaciones_pila();
     
-    return 0;
-}
+//     return 0;
+// }
