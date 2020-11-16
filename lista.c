@@ -275,10 +275,12 @@ void* lista_primero(lista_t* lista){
  */
 
 void lista_destruir(lista_t* lista){
-    while(lista->cantidad>0){
+    if(lista){
+        while(lista->cantidad>0){
 		lista_borrar(lista);
-	}
-	free(lista);
+        }
+        free(lista);
+    }
 }
 
 // -------------------------- ITERADOR -------------------------- //
@@ -294,9 +296,9 @@ void lista_destruir(lista_t* lista){
  *
  * Devuelve el puntero al iterador creado o NULL en caso de error.
  */
+
 lista_iterador_t* lista_iterador_crear(lista_t* lista){
     if(!lista) return NULL;
-    if(lista_vacia(lista)) return NULL;
     lista_iterador_t* iterador = malloc(sizeof(lista_iterador_t));
     if(!iterador) return NULL;
     iterador->lista = lista;
@@ -308,6 +310,7 @@ lista_iterador_t* lista_iterador_crear(lista_t* lista){
  * Devuelve true si hay mas elementos sobre los cuales iterar o false
  * si no hay mas.
  */
+
 bool lista_iterador_tiene_siguiente(lista_iterador_t* iterador){
     if(!iterador) return false;
     return iterador->corriente;
@@ -321,15 +324,12 @@ bool lista_iterador_tiene_siguiente(lista_iterador_t* iterador){
  * Una vez llegado al último elemento, si se invoca a
  * lista_iterador_elemento_actual, el resultado siempre será NULL.
  */
+
 bool lista_iterador_avanzar(lista_iterador_t* iterador){
     if(!iterador) return false;
-    if(!iterador->corriente) return NULL; 
-    if(lista_iterador_tiene_siguiente(iterador) == false){
-        iterador->corriente = iterador->corriente->siguiente;
-        return false;
-    }
+    if(!(iterador->corriente)) return false; 
     iterador->corriente = iterador->corriente->siguiente;
-    return true;
+    return iterador->corriente;
 }
 
 /*
@@ -338,12 +338,10 @@ bool lista_iterador_avanzar(lista_iterador_t* iterador){
  */
 void* lista_iterador_elemento_actual(lista_iterador_t* iterador){
     if(!iterador) return NULL;
-    if(!iterador->lista) return NULL;
-    if(!iterador->corriente) return NULL;
+    if(!(iterador->lista)) return NULL;
+    if(!(iterador->corriente)) return NULL;
     return iterador->corriente->elemento;
 }
-
-
 
 /*
  * Libera la memoria reservada por el iterador.
