@@ -1,6 +1,6 @@
 
 <h1 align="center">TDA Lista</h1>
-<p align="center"><img width=80% src="https://sites.google.com/site/programacioniiuno/_/rsrc/1472783418341/mi-cursada---turno-noche/bitacoras/30042013-clase4-tdalista/lista-enlazada-simple-c.png"></p>
+<p align="center"><img width=60% src="https://sites.google.com/site/programacioniiuno/_/rsrc/1472783418341/mi-cursada---turno-noche/bitacoras/30042013-clase4-tdalista/lista-enlazada-simple-c.png"></p>
 
 <h2 align="center">Algoritmos y Programación II <br> Méndez</h2><br>
 
@@ -113,7 +113,7 @@ La simple es una implementación con nodos donde cada uno refiere al siguiente, 
 
 Son otro tipo de datos abstracto  que agrupa elementos y opera sobre ellos utilizando una lógica e Last In, Last Out (LIFO). Es decir, no podemos sacar un elemento que no esté al tope de la pila.
 
-<p align="center"><img width=80% src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Pila.svg/1200px-Pila.svg.png"></p>
+<p align="center"><img width=50% src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Pila.svg/1200px-Pila.svg.png"></p>
 
 Este TDA utiliza distintos métodos:
 1. Crear
@@ -128,7 +128,7 @@ Este TDA utiliza distintos métodos:
 
 TDA similar a las pilas pero que utiliza la lógica de First In, First Out (FIFO). Como en la cola del supermercado, el primero en llegar es el primero en ser atendido.
 
-<p align="center"><img width=80% src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/ColaProg.JPG/400px-ColaProg.JPG"></p>
+<p align="center"><img width=60% src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/ColaProg.JPG/400px-ColaProg.JPG"></p>
 
 Este TDA utiliza distintos métodos:
 1. Crear
