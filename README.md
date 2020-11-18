@@ -33,33 +33,50 @@ Comandos de checkeo de memoria:
 **1. Lista:**
 
 - La lista se crea inicialmente siendo sus nodos inicial y final NULL y teniendo una cantidad inicial de 0 nodos. 
-- A la hora de agregar un nodo al final de la lista, primero reserva memoria para un nodo cuyo elemento es el pasado por parámetro y su "siguiente" apunta a NULL. Verifica si está en el estado inicial. De ser así, hace que los nodos inicial y final sean este nuevo nodo creado y la cantidad es 1. Sino, hace que el nodo final de la lista apunte al nuevo nodo en vez de a NULL y cambia el nodo final por el nuevo nodo; suma 1 a la cantidad.
-- Si queremos insertar en otra posición, en caso de que la posicion sea mayor a las posiciones posibles, ejecuta la función anterior, sino, crea un nodo.<br> 
-El caso más sencillo sería que la posición pedida sea 0, pero si no lo es, recorre la lista para encontrar el nodo en la posición anterior a la pedida. El nuevo nodo apuntará al nodo en la posición buscada y el nodo anterior a la misma que encontramos cambia su "siguiente" al nuevo nodo.
--  Para borrar un nodo de una posición recibida por parámetro la lógica es similar: verificamos que si la posición es mayor o igual a las posiciones posibles, debemos borrar el último llamando a la función que hace lo propio (y describo a continuación). Si la posición es válida y no es 0, recorre la lista para guardar referencia del nodo anterior y el posterior al nodo que queremos eliminar.<br>
-Liberamos el nodo y hacemos que el anterior apunte al posterior.
-- Borrar el último nodo copia esta lógica, asignando como posición la cantidad de nodos registrados -1 (pues las posiciones comienzan en 0 y la cantidad en 1). Sin embargo, aquí el siguiente apuntará a NULL.
+
+- A la hora de agregar un nodo al final de la lista, primero reserva memoria para un nodo cuyo elemento es el pasado por parámetro y su "siguiente" apunta a NULL.
+  Verifica si está en el estado inicial. De ser así, hace que los nodos inicial y final sean este nuevo nodo creado y la cantidad es 1. Sino, hace que el nodo final
+  de la lista apunte al nuevo nodo en vez de a NULL y cambia el nodo final por el nuevo nodo; suma 1 a la cantidad.
+
+- Si queremos insertar en otra posición, en caso de que la posicion sea mayor a las posiciones posibles, ejecuta la función anterior, sino, crea un nodo.
+  El caso más sencillo sería que la posición pedida sea 0, pero si no lo es, recorre la lista para encontrar el nodo en la posición anterior a la pedida. 
+  El nuevo nodo apuntará al nodo en la posición buscada y el nodo anterior a la misma que encontramos cambia su "siguiente" al nuevo nodo.
+
+- Para borrar un nodo de una posición recibida por parámetro la lógica es similar: verificamos que si la posición es mayor o igual a las posiciones posibles,
+  debemos borrar el último llamando a la función que hace lo propio (y describo a continuación). 
+  Si la posición es válida y no es 0, recorre la lista para guardar referencia del nodo anterior y el posterior al nodo que queremos eliminar.
+  Liberamos el nodo y hacemos que el anterior apunte al posterior.
+  
+- Borrar el último nodo copia esta lógica, asignando como posición la cantidad de nodos registrados -1 (pues las posiciones comienzan en 0 y la cantidad en 1).
+  Sin embargo, aquí el siguiente apuntará a NULL.
+  
 - La memoria de la lista se libera con un ciclo que borra el último nodo hasta que la cantidad de nodos registrados sea 0.
 
 
 **2. Pila:**
 - Apilar: llama a la función de insertar un nodo al final de la lista.
+
 - Desapilar: siguiendo la lógica de LIFO, elimina el último nodo de la lista.
+
 - Tope: el tope es el último elemento de la lista.
 
 
 **3. Cola:** 
 - Encolar: como la pila, llama a la función de insertar un nodo al final de la lista.
+
 - Desencolar: siguiendo la lógica de FIFO, elimina el primer nodo de la lista (nodo en la posición 0)
+
+- Principio de la cola: es el primer elemento de la lista.
 
 
 **4. Iterador externo:**
-- El iterador se crea sólo si recibe una lista no vacía y su corriente apuntará al nodo inicial de la misma.
-- Para avanzar, verifica si tiene o no siguiente: en caso de no tenerlo, estamos parados sobre el último elemento así que la corriente avanza a NULL y devuelve que ya no hay elementos; sino, avanza normal.
+- El iterador se crea sólo si recibe una lista válida y su corriente apuntará al nodo inicial de la misma (NULL si está vacía).
+
+- Para avanzar, verifica si tiene o no siguiente: en caso de no tenerlo, estamos parados sobre el último elemento así que la corriente avanza a NULL y 
+  devuelve que ya no hay elementos; sino, avanza normal.
 
 **5. Iterador interno:**
 - Aumenta un contador de cantidad de elementos iterados mientras que éste sea menor a la cantidad de elementos en la lista y mientras el puntero función recibido por parámentro devuelva true.
-
 
 
 ## Sección 2
